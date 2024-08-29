@@ -9,6 +9,11 @@ export WEBKIT_DISABLE_COMPOSITING_MODE=1;
 pnpm tauri dev;
 ```
 
+troubleshooting
+```shell
+for PORT in {3000..3002}; do kill -9 $(netstat -tulpn | grep $PORT | tr -s ' ' | cut -d '/' -f1 | cut -d ' ' -f7); done;
+```
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
