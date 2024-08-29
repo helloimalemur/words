@@ -6,13 +6,7 @@ First, run the development server:
 
 ```bash
 export WEBKIT_DISABLE_COMPOSITING_MODE=1;
-npm run dev;
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm tauri dev;
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
