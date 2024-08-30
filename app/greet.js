@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { invoke } from '@tauri-apps/api/tauri'
 
 export default function Greet() {
+    const [fired, setFired] = useState(false);
   const [greeting, setGreeting] = useState('0');
 
   invoke('date').then(r => {
