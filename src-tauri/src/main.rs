@@ -43,8 +43,8 @@ fn main() {
         // .plugin(tauri_plugin_dialog::init())
         .setup(|app| {
           app.manage(Mutex::new(AppState::default()));
-            let window = app.get_window("main").unwrap();
-            window.open_devtools();
+            // let window = app.get_window("main").unwrap();
+            // window.open_devtools();
             // window.close_devtools();
             Ok(())
         })

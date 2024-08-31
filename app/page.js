@@ -39,6 +39,7 @@ import {
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import Table from "@/app/table";
+import Greet from "@/app/greet";
 
 const navigation = [
   { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },

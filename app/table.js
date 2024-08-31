@@ -1,7 +1,7 @@
 import { open } from '@tauri-apps/plugin-dialog';
 import {invoke} from "@tauri-apps/api/tauri";
 import {useState} from "react";
-
+import Greet from "@/app/greet";
 
 let files = [
   // { index: 0, name: 'Lindsay Walton', title: 'Front-end Developer', path: '/home/foxx/test', word_count: '0' },
@@ -47,7 +47,11 @@ export default function Table() {
           {/*</p>*/}
         </div>
           <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-          {/*<Greet/>*/}
+              <button
+                onMouseOver={printall}
+              >
+                  <Greet />
+              </button>
           Add file
           <input
               type="file"
