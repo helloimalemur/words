@@ -8,21 +8,26 @@ export default function Greet() {
     const [fired, setFired] = useState(false);
   const [greeting, setGreeting] = useState('0');
 
-  invoke('date').then(r => {
-      console.log("fired")
-      setGreeting(r)
-  })
-    invoke('write_string', {string: greeting.toString()}).then(r => {
-        console.log(r)
-    })
-  // useEffect(() => {
-  //   invoke<string>('date', { name: 'Next.js' })
-  //     .then(result => {
-  //       console.log("fired")
-  //       setGreeting(result)
-  //     })
-  //     .catch(console.error)
-  // }, [])
+
+  useEffect(() => {
+
+      if (!fired && greeting === '0') {
+          invoke('date').then(r => {
+              console.log("fired")
+              setGreeting(r)
+              invoke('write_string', {string: greeting}).then(r => {
+                  console.log(r)
+              })
+              setFired(true)
+          })
+          if (fired) {
+              invoke('printall').then(r => {
+                  console.log(r)
+              })
+          }
+
+      }
+  }, [fired, setFired, greeting, setGreeting])
 
 
   // Necessary because we will have to use Greet as a component later.

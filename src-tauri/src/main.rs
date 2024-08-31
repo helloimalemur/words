@@ -34,14 +34,18 @@ impl AppState {
 }
 
 #[tauri::command]
-fn date() -> i64 {
-    Local::now().timestamp()
+fn date() -> String {
+    Local::now().timestamp().to_string()
 }
 
 #[tauri::command]
 fn write_string(string: String, state: State<'_, Mutex<AppState>>) {
     let mut app_state = state.lock().unwrap();
     app_state.strings.push(string);
+}
+#[tauri::command]
+fn printall(state: State<'_, Mutex<AppState>>) {
+    let mut app_state = state.lock().unwrap();
     for i in app_state.strings.clone() {
         println!("{}", i)
     }
@@ -60,7 +64,7 @@ fn main() {
             Ok(())
         })
         .invoke_handler(
-          tauri::generate_handler![date, write_string]
+          tauri::generate_handler![date, write_string, printall]
         )
     .run(tauri::generate_context!())
     .expect("error while running tauri application");
