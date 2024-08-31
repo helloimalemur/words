@@ -1,6 +1,8 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
+mod entries;
+use entries::*;
 use std::sync::Mutex;
 use chrono::Local;
 use tauri::{Manager, State};
@@ -33,24 +35,6 @@ impl AppState {
     }
 }
 
-#[tauri::command]
-fn date() -> String {
-    Local::now().timestamp().to_string()
-}
-
-#[tauri::command]
-fn write_string(string: String, state: State<'_, Mutex<AppState>>) {
-    let mut app_state = state.lock().unwrap();
-    app_state.strings.push(string);
-}
-#[tauri::command]
-fn printall(state: State<'_, Mutex<AppState>>) {
-    let mut app_state = state.lock().unwrap();
-    for i in app_state.strings.clone() {
-        println!("{}", i)
-    }
-}
-
 
 
 
@@ -64,7 +48,7 @@ fn main() {
             Ok(())
         })
         .invoke_handler(
-          tauri::generate_handler![date, write_string, printall]
+          tauri::generate_handler![date, write_string, printall, remove_entry]
         )
     .run(tauri::generate_context!())
     .expect("error while running tauri application");
