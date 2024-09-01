@@ -24,16 +24,13 @@ export default function Table() {
 
   const update_list = async () => {
     invoke('get_entries').then(r => {
-        console.log(r)
+        // console.log(r)
         if (r.toString().length > 2) {
             let parsed = JSON.parse(r);
             setFiles(parsed)
         } else {
             setFiles(null)
         }
-        // console.log(parsed)
-        // console.log(filez)
-        // setFiles(r)
     })
   }
 
