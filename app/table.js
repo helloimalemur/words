@@ -24,7 +24,11 @@ export default function Table() {
 
   const update_word_count = async () => {
     invoke('update_word_count').then(r => {})
-    await update_list();
+    try {
+        update_list().then(r => {})
+    } catch (e) {
+        console.log(e)
+    }
   }
 
   const update_list = async () => {
@@ -78,7 +82,7 @@ export default function Table() {
     const [updated, setUpdated] = useState(false)
     useEffect(() => {
         if (!updated) {
-            update_list().then(r => r);
+            setInterval(update_word_count, 10000)
             setUpdated(true)
         }
     }, [update_list])
