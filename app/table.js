@@ -16,6 +16,14 @@ export default function Table() {
     invoke('printall').then(r => {})
   }
 
+  const openfile = async () => {
+    invoke('open_file').then(r => {})
+  }
+
+  const printfile = async (file) => {
+    console.log(file)
+  }
+
   const remove_entry = async function (index) {
     console.log("Removing: " + removal)
     setRemoval(index)
@@ -47,26 +55,17 @@ export default function Table() {
           {/*</p>*/}
         </div>
           <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-              <button
-                onMouseOver={printall}
-              >
-                  <Greet />
-              </button>
-          Add file
-          <input
-              type="file"
-              // id="filepicker"
-              onChange={(e) => {
-                  const file = e.target.files[0];
-                  setAddition(file.webkitRelativePath)
-              }}
-              className="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-          />
+              {/*<button*/}
+              {/*  onMouseOver={openfile}*/}
+              {/*>*/}
+              {/*    /!*<Greet />*!/*/}
+              {/*</button>*/}
           <button
-              onClick={() => {add_entry(addition)}}
+              onClick={openfile}
               type="button"
               className="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
+            Add file
           </button>
           </div>
       </div>

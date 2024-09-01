@@ -3,6 +3,8 @@
 
 mod entries;
 use entries::*;
+mod files;
+use files::*;
 use std::sync::Mutex;
 use chrono::Local;
 use tauri::{Manager, State};
@@ -43,13 +45,13 @@ fn main() {
         // .plugin(tauri_plugin_dialog::init())
         .setup(|app| {
           app.manage(Mutex::new(AppState::default()));
-            // let window = app.get_window("main").unwrap();
-            // window.open_devtools();
+            let window = app.get_window("main").unwrap();
+            window.open_devtools();
             // window.close_devtools();
             Ok(())
         })
         .invoke_handler(
-          tauri::generate_handler![date, write_string, printall, remove_entry]
+          tauri::generate_handler![date, write_string, printall, remove_entry, open_file]
         )
     .run(tauri::generate_context!())
     .expect("error while running tauri application");
