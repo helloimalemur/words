@@ -11,30 +11,30 @@ use tauri::{Manager, State};
 
 #[derive(serde::Deserialize)]
 struct AppState {
-    strings: Vec<String>
+    files: DocFiles
 }
 
 impl AppState {
     fn default() -> AppState {
-        AppState { strings: vec![] }
+        AppState { files: DocFiles::default() }
     }
-    fn print_strings(&mut self) {
-        for i in self.strings.clone() {
-            println!("{}", i)
-        }
-    }
-    fn add_string<T: ToString>(&mut self, string: T) {
-        self.strings.push(string.to_string())
-    }
-    fn remote_string(&mut self, string: String) {
-        let mut pos = 0;
-        for i in self.strings.clone() {
-            if i.contains(&string) {
-                self.strings.remove(pos);
-            }
-            pos += 1
-        }
-    }
+    // fn print_strings(&mut self) {
+    //     for i in self.files.clone() {
+    //         println!("{}", i)
+    //     }
+    // }
+    // fn add_file<T: ToString>(&mut self, string: T) {
+    //     self.files
+    // }
+    // fn remote_string(&mut self, string: String) {
+    //     let mut pos = 0;
+    //     for i in self.files.clone() {
+    //         if i.contains(&string) {
+    //             self.files.remove(pos);
+    //         }
+    //         pos += 1
+    //     }
+    // }
 }
 
 
@@ -51,7 +51,7 @@ fn main() {
             Ok(())
         })
         .invoke_handler(
-          tauri::generate_handler![date, write_string, printall, remove_entry, open_file]
+          tauri::generate_handler![date, printall, remove_entry, open_file]
         )
     .run(tauri::generate_context!())
     .expect("error while running tauri application");
