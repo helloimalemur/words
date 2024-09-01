@@ -5,7 +5,7 @@ mod fe_crud;
 use fe_crud::*;
 mod files;
 use files::*;
-use std::sync::Mutex;
+use std::sync::{Arc, Mutex};
 use chrono::Local;
 use tauri::{Manager, State};
 
@@ -41,17 +41,21 @@ impl AppState {
 
 
 fn main() {
+    let state = Mutex::new(AppState::default());
+
+
+
     tauri::Builder::default()
         // .plugin(tauri_plugin_dialog::init())
-        .setup(|app| {
-          app.manage(Mutex::new(AppState::default()));
+        .setup( |app| {
+          app.manage(state);
             let window = app.get_window("main").unwrap();
             window.open_devtools();
             // window.close_devtools();
             Ok(())
         })
         .invoke_handler(
-          tauri::generate_handler![date, printall, get_entries, remove_entry, remove_all_entries, open_file]
+          tauri::generate_handler![date, printall, get_entries, remove_entry, remove_all_entries, open_file, update_word_count]
         )
     .run(tauri::generate_context!())
     .expect("error while running tauri application");

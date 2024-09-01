@@ -22,6 +22,11 @@ export default function Table() {
     invoke('printall').then(r => {})
   }
 
+  const update_word_count = async () => {
+    invoke('update_word_count').then(r => {})
+    await update_list();
+  }
+
   const update_list = async () => {
     invoke('get_entries').then(r => {
         // console.log(r)
@@ -102,6 +107,13 @@ export default function Table() {
                   className="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                   Clear
+              </button>
+              <button
+                  onClick={update_word_count}
+                  type="button"
+                  className="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                  Update
               </button>
           </div>
       </div>

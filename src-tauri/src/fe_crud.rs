@@ -1,6 +1,8 @@
+use std::collections::HashMap;
 use std::sync::Mutex;
 use chrono::Local;
-use tauri::State;
+use rand::Rng;
+use tauri::{Error, Manager, State};
 use crate::AppState;
 use crate::files::DocFile;
 
@@ -38,5 +40,32 @@ pub fn remove_all_entries(state: State<'_, Mutex<AppState>>) {
     let mut bind = state.lock();
     let mut app_state = bind.as_mut().unwrap();
     app_state.files.files_container.clear();
+}
 
+#[tauri::command]
+pub fn update_word_count(state: State<'_, Mutex<AppState>>) {
+    let mut bind = state.lock();
+    let mut app_state = bind.as_mut().unwrap();
+    let cloned = app_state.files.files_container.clone();
+    let mut updates: HashMap<u32, u8> = HashMap::new();
+
+    for file in cloned {
+        let ind = file.index;
+        let wc = get_word_count(file.path);
+        updates.insert(ind, wc);
+    }
+
+    for (ind, wc) in updates {
+        for mut entry in app_state.files.files_container.iter_mut() {
+            if entry.index.eq(&ind) {
+                entry.word_count = wc as u64
+            }
+        }
+    }
+}
+
+fn get_word_count(path: String) -> u8 {
+    let mut rand = rand::thread_rng();
+    let nm: u8 = rand.random();
+    nm
 }
