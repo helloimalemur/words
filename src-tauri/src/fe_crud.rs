@@ -4,7 +4,7 @@ use chrono::Local;
 use rand::Rng;
 use tauri::{Error, Manager, State};
 use crate::AppState;
-use crate::calculations::calc::run_calculations;
+use crate::calculations::calc::{run_calculations, CalcResults};
 use crate::docx::loader::read_docx_contents_to_string;
 use crate::files::DocFile;
 
@@ -53,8 +53,8 @@ pub fn update_word_count(state: State<'_, Mutex<AppState>>) {
 
     for file in cloned {
         let ind = file.index;
-        let wc = get_word_count(file.path);
-        updates.insert(ind, wc);
+        let calc = get_calculations(file.path);
+        updates.insert(ind, calc.word_count as u64);
     }
 
     for (ind, wc) in updates {
@@ -66,8 +66,7 @@ pub fn update_word_count(state: State<'_, Mutex<AppState>>) {
     }
 }
 
-fn get_word_count(path: String) -> u64 {
+fn get_calculations(path: String) -> CalcResults {
     let contents = read_docx_contents_to_string(path);
-    run_calculations(contents);
-    0
+    run_calculations(contents)
 }
