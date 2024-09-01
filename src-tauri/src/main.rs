@@ -1,8 +1,8 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-mod entries;
-use entries::*;
+mod fe_crud;
+use fe_crud::*;
 mod files;
 use files::*;
 use std::sync::Mutex;
@@ -51,7 +51,7 @@ fn main() {
             Ok(())
         })
         .invoke_handler(
-          tauri::generate_handler![date, printall, remove_entry, open_file]
+          tauri::generate_handler![date, printall, get_entries, remove_entry, open_file]
         )
     .run(tauri::generate_context!())
     .expect("error while running tauri application");

@@ -12,12 +12,20 @@ pub fn date() -> String {
 
 #[tauri::command]
 pub fn printall(state: State<'_, Mutex<AppState>>) {
-    let mut app_state = state.lock().unwrap();
-    let files = app_state.files.files_container.clone();
+    // let mut app_state = state.lock().unwrap();
+    let files = state.lock().unwrap().files.files_container.clone();
     for i in files.iter() {
         println!("{:?}", i)
     }
 }
+
+#[tauri::command]
+pub fn get_entries(state: State<'_, Mutex<AppState>>) -> String {
+    // let mut app_state = state.lock().unwrap();
+    let files = state.lock().unwrap().files.files_container.clone();
+    serde_json::to_string(&files).unwrap_or_default()
+}
+
 #[tauri::command]
 pub fn remove_entry(index: usize, state: State<'_, Mutex<AppState>>) {
     let mut app_state = state.lock().unwrap();

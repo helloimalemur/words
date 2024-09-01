@@ -3,7 +3,7 @@ use native_dialog::{FileDialog, MessageDialog, MessageType};
 use tauri::State;
 use crate::AppState;
 
-#[derive(serde::Deserialize, Clone, Debug)]
+#[derive(serde::Deserialize, serde::Serialize, Clone, Debug)]
 pub struct DocFiles {
     pub files_container: Vec<DocFile>
 }
@@ -13,7 +13,7 @@ impl DocFiles {
         DocFiles { files_container: vec![] } }
 }
 
-#[derive(serde::Deserialize, Clone, Debug)]
+#[derive(serde::Deserialize, serde::Serialize, Clone, Debug)]
 pub struct DocFile {
     pub path: String,
     pub name: String,
