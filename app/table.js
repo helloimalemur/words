@@ -73,12 +73,6 @@ export default function Table() {
         // invoke('add_entry', {index: removal}).then(r => {})
   }
 
-  // const get_all_entries = async function (index) {
-  //   console.log("Updating..")
-  //   invoke('get_all_entries').then(r => {})
-  //   setAllentries(index)
-  // }
-
     const [updated, setUpdated] = useState(false)
     useEffect(() => {
         if (!updated) {
