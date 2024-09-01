@@ -93,14 +93,8 @@ export default function Table() {
           {/*</p>*/}
         </div>
           <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-              {/*<button*/}
-              {/*  onMouseOver={openfile}*/}
-              {/*>*/}
-              {/*    /!*<Greet />*!/*/}
-              {/*</button>*/}
               <button
                   onClick={openfile}
-                  // onMouseOver={getall}
                   type="button"
                   className="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
@@ -153,10 +147,6 @@ export default function Table() {
                         onClick={() => {
                           remove_entry(file.index).then(r => r)
                         }}
-                        // onchange={(e) => {
-                        //   console.log("Removing: " + e.target.value)
-                        //   setRemoval(e.target.value)
-                        // }}
                         href="#"
                         className="text-indigo-600 hover:text-indigo-900"
                       >
