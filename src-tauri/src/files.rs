@@ -1,5 +1,6 @@
 use std::sync::Mutex;
 use native_dialog::{FileDialog, MessageDialog, MessageType};
+use os_info::Type;
 use rand::Rng;
 use tauri::State;
 use crate::AppState;
@@ -96,7 +97,12 @@ pub fn add_file(path: String, state: State<Mutex<AppState>>) {
 }
 
 fn file_name_from_full_path(path: String) -> Option<String> {
-    let p = String::from(path);
-    p.split('/').last()?;
-    Some(p)
+    // get file name only
+    let info = os_info::get();
+    let path: String = match info.os_type() {
+        Type::Windows => path.split('\\').last()?,
+        _ => path.split('/').last()?,
+    }
+    .to_string();
+    Some(path)
 }

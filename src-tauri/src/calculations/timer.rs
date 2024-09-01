@@ -25,13 +25,7 @@ pub fn run_timer(
         // todo()! prevent opening files already open
         ent.full_file_contents = read_docx_contents_to_string(ent.path.to_string());
 
-        // get file name only
-        let info = os_info::get();
-        let path: String = match info.os_type() {
-            Type::Windows => ent.path.split('\\').last().unwrap(),
-            _ => ent.path.split('/').last().unwrap(),
-        }
-        .to_string();
+
 
         // get calculcations
         let white_space = calculations::counts::get_ws_count(ent.full_file_contents.to_string());

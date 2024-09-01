@@ -22,6 +22,7 @@ native-dialog = "0.7.0"
 rand = "0.9.0-alpha.2"
 dotext = "0.1.1"
 words-count = "0.1.6"
+os_info = "3.8.2"
 #tauri-plugin-dialog = "2.0.0-rc.3"
 #serialize-to-javascript = "0.1.1"
 
