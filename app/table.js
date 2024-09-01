@@ -16,6 +16,13 @@ export default function Table() {
     invoke('printall').then(r => {})
   }
 
+  const getall = async () => {
+    invoke('get_entries').then(r => {
+        console.log(r)
+        // files = r
+    })
+  }
+
   const openfile = async () => {
     invoke('open_file').then(r => {})
   }
@@ -62,7 +69,7 @@ export default function Table() {
               {/*</button>*/}
           <button
               onClick={openfile}
-              onMouseOver={printall}
+              onMouseOver={getall}
               type="button"
               className="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >

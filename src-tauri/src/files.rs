@@ -1,5 +1,6 @@
 use std::sync::Mutex;
 use native_dialog::{FileDialog, MessageDialog, MessageType};
+use rand::Rng;
 use tauri::State;
 use crate::AppState;
 
@@ -15,19 +16,25 @@ impl DocFiles {
 
 #[derive(serde::Deserialize, serde::Serialize, Clone, Debug)]
 pub struct DocFile {
-    pub path: String,
+    pub index: u64,
     pub name: String,
+    pub title: String,
+    pub path: String,
     pub word_count: u64
 }
 
 impl DocFile {
     pub fn new(path: String) -> DocFile {
         let path_string = String::from(path);
+        let mut rand = rand::thread_rng();
+        let ind: u64 = rand.random();
 
         DocFile {
+            index: ind,
             path: path_string,
             name: "".to_string(),
             word_count: 0,
+            title: "".to_string(),
         }
     }
 }
