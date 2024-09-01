@@ -1,7 +1,6 @@
 use crate::calculations;
-use crate::docx::loader::read_docx_contents_to_string;
 
-pub fn run_timer(file_contents: String) {
+pub fn run_calculations(file_contents: String) {
     // get calculcations
     let white_space = calculations::counts::get_ws_count(file_contents.clone());
     let paragraph_count =
