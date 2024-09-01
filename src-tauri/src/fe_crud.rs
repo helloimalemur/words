@@ -27,7 +27,7 @@ pub fn get_entries(state: State<'_, Mutex<AppState>>) -> String {
 }
 
 #[tauri::command]
-pub fn remove_entry(index: u64, state: State<'_, Mutex<AppState>>) {
+pub fn remove_entry(index: u32, state: State<'_, Mutex<AppState>>) {
     let mut bind = state.lock();
     let mut app_state = bind.as_mut().unwrap();
     app_state.files.remove(index);

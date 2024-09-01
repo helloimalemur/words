@@ -12,7 +12,7 @@ pub struct DocFiles {
 impl DocFiles {
     pub fn default() -> DocFiles {
         DocFiles { files_container: vec![] } }
-    pub fn remove(&mut self, ind: u64) {
+    pub fn remove(&mut self, ind: u32) {
         if !self.files_container.is_empty() {
             let mut tr = vec![];
             for (i, d) in self.files_container.iter().enumerate() {
@@ -29,7 +29,7 @@ impl DocFiles {
 
 #[derive(serde::Deserialize, serde::Serialize, Clone, Debug)]
 pub struct DocFile {
-    pub index: u64,
+    pub index: u32,
     pub name: String,
     pub title: String,
     pub path: String,
@@ -40,7 +40,7 @@ impl DocFile {
     pub fn new(path: String) -> DocFile {
         let path_string = String::from(path);
         let mut rand = rand::thread_rng();
-        let ind: u64 = rand.random();
+        let ind: u32 = rand.random();
 
         DocFile {
             index: ind,

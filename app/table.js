@@ -46,14 +46,13 @@ export default function Table() {
     console.log(file)
   }
 
-  const remove_entry = async function (index) {
-    console.log("Removing: " + removal)
-    setRemoval(index)
-    invoke('remove_entry', {index: removal}).then(r => {})
-    await update_list();
+  const remove_entry = function (index) {
+    invoke('remove_entry', {index: index}).then(r => {
+        update_list().then(r => {})
+    })
   }
 
-    const remove_all_entries = async function () {
+  const remove_all_entries = async function () {
     invoke('remove_all_entries').then(r => {})
     await update_list();
   }
@@ -145,7 +144,7 @@ export default function Table() {
                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                       <a
                         onClick={() => {
-                          remove_entry(file.index).then(r => r)
+                          remove_entry(file.index);
                         }}
                         href="#"
                         className="text-indigo-600 hover:text-indigo-900"
