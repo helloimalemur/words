@@ -5,6 +5,7 @@ mod fe_crud;
 use fe_crud::*;
 mod files;
 mod docx;
+mod calculations;
 
 use files::*;
 use std::sync::{Arc, Mutex};
