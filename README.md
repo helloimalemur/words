@@ -5,8 +5,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 First, run the development server:
 
 ```bash
-export WEBKIT_DISABLE_COMPOSITING_MODE=1;
-pnpm tauri dev;
+export WEBKIT_DISABLE_COMPOSITING_MODE=1; pnpm tauri dev;
 ```
 
 troubleshooting

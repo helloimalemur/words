@@ -27,8 +27,26 @@ pub fn get_entries(state: State<'_, Mutex<AppState>>) -> String {
 }
 
 #[tauri::command]
-pub fn remove_entry(index: usize, state: State<'_, Mutex<AppState>>) {
-    let mut app_state = state.lock().unwrap();
-    // app_state.strings.remove(index);
-    println!("removed: {}", index)
+pub fn remove_entry(index: u64, state: State<'_, Mutex<AppState>>) {
+    let mut bind = state.lock();
+    let mut app_state = bind.as_mut().unwrap();
+    let mut to_remove = vec![];
+    for (ind, file) in app_state.files.files_container.iter().enumerate() {
+        println!("removed: {}", file.path);
+        if file.index.eq(&index) {
+            to_remove.push(ind)
+        }
+    }
+
+    for i in to_remove {
+        app_state.files.files_container.remove(i);
+    }
+}
+
+#[tauri::command]
+pub fn remove_all_entries(state: State<'_, Mutex<AppState>>) {
+    let mut bind = state.lock();
+    let mut app_state = bind.as_mut().unwrap();
+    app_state.files.files_container.clear();
+
 }

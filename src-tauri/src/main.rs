@@ -51,7 +51,7 @@ fn main() {
             Ok(())
         })
         .invoke_handler(
-          tauri::generate_handler![date, printall, get_entries, remove_entry, open_file]
+          tauri::generate_handler![date, printall, get_entries, remove_entry, remove_all_entries, open_file]
         )
     .run(tauri::generate_context!())
     .expect("error while running tauri application");

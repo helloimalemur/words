@@ -1,30 +1,45 @@
 import { open } from '@tauri-apps/plugin-dialog';
 import {invoke} from "@tauri-apps/api/tauri";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Greet from "@/app/greet";
 
-let files = [
-  // { index: 0, name: 'Lindsay Walton', title: 'Front-end Developer', path: '/home/foxx/test', word_count: '0' },
-  // More people...
-]
+// let files = [
+//   { index: 0, name: 'Lindsay Walton', title: 'Front-end Developer', path: '/home/foxx/test', word_count: '0' },
+//   // More people...
+// ]
 
 export default function Table() {
   const [removal, setRemoval] = useState(0);
   const [addition, setAddition] = useState("");
+  const [files, setFiles] = useState([]);
+  // const [files, setFiles] = useState([{ index: 0, name: 'Lindsay Walton', title: 'Front-end Developer', path: '/home/foxx/test', word_count: '0' }]);
+  //
+  let filez = [
+    { index: 0, name: 'Lindsay Walton', title: 'Front-end Developer', path: '/home/foxx/test', word_count: '0' },
+  ]
 
   const printall = async () => {
     invoke('printall').then(r => {})
   }
 
-  const getall = async () => {
+  const update_list = async () => {
     invoke('get_entries').then(r => {
         console.log(r)
-        // files = r
+        if (r.toString().length > 2) {
+            let parsed = JSON.parse(r);
+            setFiles(parsed)
+        } else {
+            setFiles(null)
+        }
+        // console.log(parsed)
+        // console.log(filez)
+        // setFiles(r)
     })
   }
 
   const openfile = async () => {
-    invoke('open_file').then(r => {})
+    invoke('open_file').then(r => {});
+    await update_list();
   }
 
   const printfile = async (file) => {
@@ -35,7 +50,14 @@ export default function Table() {
     console.log("Removing: " + removal)
     setRemoval(index)
     invoke('remove_entry', {index: removal}).then(r => {})
+    await update_list();
   }
+
+    const remove_all_entries = async function () {
+    invoke('remove_all_entries').then(r => {})
+    await update_list();
+  }
+
 
   const add_entry = async function (path) {
         // const file = await open({
@@ -52,6 +74,15 @@ export default function Table() {
   //   setAllentries(index)
   // }
 
+    const [updated, setUpdated] = useState(false)
+    useEffect(() => {
+        if (!updated) {
+            update_list().then(r => r);
+            setUpdated(true)
+        }
+    }, [update_list])
+
+
   return (
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center">
@@ -67,14 +98,21 @@ export default function Table() {
               {/*>*/}
               {/*    /!*<Greet />*!/*/}
               {/*</button>*/}
-          <button
-              onClick={openfile}
-              onMouseOver={getall}
-              type="button"
-              className="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-          >
-            Add file
-          </button>
+              <button
+                  onClick={openfile}
+                  // onMouseOver={getall}
+                  type="button"
+                  className="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                  Add file
+              </button>
+              <button
+                  onClick={remove_all_entries}
+                  type="button"
+                  className="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                  Clear
+              </button>
           </div>
       </div>
         <div className="mt-8 flow-root">
@@ -83,7 +121,8 @@ export default function Table() {
                     <table className="min-w-full divide-y divide-gray-300">
                         <thead>
                         <tr>
-                            <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">
+                            <th scope="col"
+                                className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">
                     Name
                   </th>
                   <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
@@ -101,8 +140,8 @@ export default function Table() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
-                {files.map((file) => (
-                  <tr key={file.path}>
+                {(files !== null && files !== undefined && files !== "") ? files.map((file) => (
+                  <tr key={file.index}>
                     <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
                       {file.name}
                     </td>
@@ -125,7 +164,7 @@ export default function Table() {
                       </a>
                     </td>
                   </tr>
-                ))}
+                )) : ""}
               </tbody>
             </table>
           </div>
