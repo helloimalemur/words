@@ -48,7 +48,7 @@ pub fn update_word_count(state: State<'_, Mutex<AppState>>) {
     let mut bind = state.lock();
     let mut app_state = bind.as_mut().unwrap();
     let cloned = app_state.files.files_container.clone();
-    let mut updates: HashMap<u32, u8> = HashMap::new();
+    let mut updates: HashMap<u32, u64> = HashMap::new();
 
     for file in cloned {
         let ind = file.index;
@@ -65,6 +65,7 @@ pub fn update_word_count(state: State<'_, Mutex<AppState>>) {
     }
 }
 
-fn get_word_count(path: String) -> String {
-    read_docx_contents_to_string(path)
+fn get_word_count(path: String) -> u64 {
+    read_docx_contents_to_string(path);
+    0
 }
