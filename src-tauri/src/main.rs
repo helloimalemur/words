@@ -4,6 +4,8 @@
 mod fe_crud;
 use fe_crud::*;
 mod files;
+mod docx;
+
 use files::*;
 use std::sync::{Arc, Mutex};
 use chrono::Local;

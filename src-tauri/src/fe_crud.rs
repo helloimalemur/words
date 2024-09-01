@@ -4,6 +4,7 @@ use chrono::Local;
 use rand::Rng;
 use tauri::{Error, Manager, State};
 use crate::AppState;
+use crate::docx::loader::read_docx_contents_to_string;
 use crate::files::DocFile;
 
 #[tauri::command]
@@ -64,8 +65,6 @@ pub fn update_word_count(state: State<'_, Mutex<AppState>>) {
     }
 }
 
-fn get_word_count(path: String) -> u8 {
-    let mut rand = rand::thread_rng();
-    let nm: u8 = rand.random();
-    nm
+fn get_word_count(path: String) -> String {
+    read_docx_contents_to_string(path)
 }
