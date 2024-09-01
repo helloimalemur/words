@@ -160,11 +160,16 @@ export default function Table() {
                         href="#"
                         className="text-indigo-600 hover:text-indigo-900"
                       >
-                        Edit<span className="sr-only">, {file.name}</span>
+                        Remove<span className="sr-only">, {file.name}</span>
                       </a>
                     </td>
                   </tr>
-                )) : ""}
+                )) :
+                <tr>
+                    <td>
+                        <a>empty</a>
+                    </td>
+                </tr>}
               </tbody>
             </table>
           </div>

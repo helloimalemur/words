@@ -30,17 +30,7 @@ pub fn get_entries(state: State<'_, Mutex<AppState>>) -> String {
 pub fn remove_entry(index: u64, state: State<'_, Mutex<AppState>>) {
     let mut bind = state.lock();
     let mut app_state = bind.as_mut().unwrap();
-    let mut to_remove = vec![];
-    for (ind, file) in app_state.files.files_container.iter().enumerate() {
-        println!("removed: {}", file.path);
-        if file.index.eq(&index) {
-            to_remove.push(ind)
-        }
-    }
-
-    for i in to_remove {
-        app_state.files.files_container.remove(i);
-    }
+    app_state.files.remove(index);
 }
 
 #[tauri::command]

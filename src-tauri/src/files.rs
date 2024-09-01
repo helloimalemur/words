@@ -12,6 +12,19 @@ pub struct DocFiles {
 impl DocFiles {
     pub fn default() -> DocFiles {
         DocFiles { files_container: vec![] } }
+    pub fn remove(&mut self, ind: u64) {
+        if !self.files_container.is_empty() {
+            let mut tr = vec![];
+            for (i, d) in self.files_container.iter().enumerate() {
+                if d.index.eq(&ind) {
+                    tr.push(i)
+                }
+            }
+            for ent in tr {
+                self.files_container.remove(ent);
+            }
+        }
+    }
 }
 
 #[derive(serde::Deserialize, serde::Serialize, Clone, Debug)]
