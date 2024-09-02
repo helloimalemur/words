@@ -55,7 +55,7 @@ pub fn get_top_used_word(input: String, nth_size: usize) -> String {
     if let Some(s) = top.get(pos) {
         let (top_string, mut nth_size) = s;
         nth_string = top_string.to_string();
-        println!("toplen: {}, nths: {}, pos: {} -- {}", top.len(), nth_size, pos, nth_string);
+        // println!("toplen: {}, nths: {}, pos: {} -- {}", top.len(), nth_size, pos, nth_string);
         nth_size = nth_size;
     }
 
