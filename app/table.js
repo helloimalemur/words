@@ -91,7 +91,7 @@ export default function Table() {
           {/*  A list of all the users in your account including their name, title, email and role.*/}
           {/*</p>*/}
         </div>
-          <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+          <div className="mt-4 sm:ml-16 sm:mt-0 grid grid-cols-3 flex-auto">
               <button
                   onClick={openfile}
                   type="button"
