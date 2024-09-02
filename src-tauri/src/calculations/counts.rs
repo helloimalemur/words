@@ -38,6 +38,7 @@ pub fn get_top_used_word(input: String, nth_size: usize) -> String {
         .collect();
 
     top.sort_by_key(|ent| { ent.1 });
+    top.reverse();
 
     // println!("{:?}", top);
 
@@ -45,6 +46,11 @@ pub fn get_top_used_word(input: String, nth_size: usize) -> String {
     if ((top.len() >= nth_size) && (nth_size > 0usize)) {
         pos = top.len() - nth_size;
     }
+
+    // let mut rev_top = Vec::new();
+    // for i in (0..top.len()).rev() {
+    //     rev_top.push(top.get(i).unwrap())
+    // }
 
     if let Some(s) = top.get(pos) {
         let (top_string, mut nth_size) = s;
