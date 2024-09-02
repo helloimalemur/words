@@ -2,6 +2,8 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 mod fe_crud;
+
+use std::env;
 use fe_crud::*;
 mod files;
 mod docx;
@@ -45,9 +47,7 @@ impl AppState {
 
 fn main() {
     let state = Mutex::new(AppState::default());
-
-
-
+    env::set_var("WEBKIT_DISABLE_COMPOSITING_MODE", "1");
     tauri::Builder::default()
         // .plugin(tauri_plugin_dialog::init())
         .setup( |app| {
