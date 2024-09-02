@@ -66,7 +66,6 @@ pub fn update_word_count(state: State<'_, Mutex<AppState>>) {
                 entry.first_mu = calc_res.first_most_used.clone();
                 entry.second_mu = calc_res.second_most_used.clone();
                 entry.third_mu = calc_res.third_most_used.clone();
-
             }
         }
     }
