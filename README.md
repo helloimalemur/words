@@ -2,6 +2,8 @@
 Word count tracking application for writers/novelists 
 (Work In Progress)
 
+![words](https://github.com/user-attachments/assets/f1d112c0-d9a2-4e41-bede-be8130242f6c)
+
 
 ## Download and Build (requires Rust and pnpm)
 ```shell
