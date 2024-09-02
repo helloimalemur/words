@@ -4,7 +4,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Download and install (requires Rust and pnpm)
 ```shell
-curl --proto '=https' --tlsv1.2 -sSf  | sh 
+curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/helloimalemur/words/master/install.sh | sh 
 ```
 
 
