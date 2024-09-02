@@ -34,11 +34,19 @@ pub fn get_top_used_word(input: String, nth_size: usize) -> String {
 
     let mut top: Vec<(&str, usize)> = words_count::count_separately(binding.as_str())
         .into_iter()
+        .filter(|a| {a.0.to_string().ne("")})
         .collect();
 
     top.sort_by_key(|ent| { ent.1 });
 
-    if let Some(s) = top.get(nth_size) {
+    println!("{:?}", top);
+
+    let mut pos= 0usize;
+    if nth_size > 0 && top.len() > nth_size {
+        pos = top.len() - nth_size;
+    }
+
+    if let Some(s) = top.get(pos) {
         let (top_string, mut nth_size) = s;
         nth_string = top_string.to_string();
         nth_size = nth_size;
