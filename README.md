@@ -1,4 +1,7 @@
 # Words
+Word count tracking application for writers/novelists 
+(Work In Progress)
+
 
 ## Download and install (requires Rust and pnpm)
 ```shell
