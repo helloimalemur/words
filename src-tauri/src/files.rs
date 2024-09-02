@@ -75,7 +75,7 @@ pub fn file_dialog(state: State<Mutex<AppState>>) {
     let path = FileDialog::new()
         // .set_location("~/Desktop")
         // .add_filter("PNG Image", &["png"])
-        .add_filter("Document", &["doc", "docx", "odt"])
+        .add_filter("Document", &["docx"])
         .show_open_single_file()
         .unwrap();
 
