@@ -53,7 +53,7 @@ fn main() {
         .setup( |app| {
           app.manage(state);
             let window = app.get_window("main").unwrap();
-            window.open_devtools();
+            // window.open_devtools();
             // window.close_devtools();
             Ok(())
         })
