@@ -3,7 +3,7 @@ Word count tracking application for writers/novelists
 (Work In Progress)
 
 
-## Download and install (requires Rust and pnpm)
+## Download and Build (requires Rust and pnpm)
 ```shell
 curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/helloimalemur/words/master/install.sh | sh
 ```
