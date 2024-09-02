@@ -24,11 +24,11 @@ pub fn run_calculations(file_contents: String) -> CalcResults {
     let char_count_no_ws = char_count - white_space;
 
     let first_most_used =
-        calculations::counts::get_top_used_word(file_contents.clone());
+        calculations::counts::get_top_used_word(file_contents.clone(), 0usize);
     let second_most_used =
-        calculations::counts::get_top_used_word(file_contents.clone());
+        calculations::counts::get_top_used_word(file_contents.clone(), 1usize);
     let third_most_used =
-        calculations::counts::get_top_used_word(file_contents.clone());
+        calculations::counts::get_top_used_word(file_contents.clone(), 2usize);
 
     CalcResults {
         white_space,

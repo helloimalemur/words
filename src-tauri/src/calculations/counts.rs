@@ -23,16 +23,23 @@ pub fn get_ws_count(input: String) -> i64 {
 //     todo!()
 // }
 
-pub fn get_top_used_word(input: String) -> String {
+pub fn get_top_used_word(input: String, nth_size: usize) -> String {
     let binding = input.to_lowercase();
 
     let mut nth_string = String::new();
-    let mut nth_size = 0usize;
-    let top = words_count::count_separately(binding.as_str())
+    // let mut nth_size = 0usize;
+    // let top = words_count::count_separately(binding.as_str())
+    //     .into_iter()
+    //     .max_by_key(|entry| entry.1);
+
+    let mut top: Vec<(&str, usize)> = words_count::count_separately(binding.as_str())
         .into_iter()
-        .max_by_key(|entry| entry.1);
-    if top.is_some() {
-        let (top_string, mut nth_size) = top.expect("parse top used word");
+        .collect();
+
+    top.sort_by_key(|ent| { ent.1 });
+
+    if let Some(s) = top.get(nth_size) {
+        let (top_string, mut nth_size) = s;
         nth_string = top_string.to_string();
         nth_size = nth_size;
     }

@@ -34,7 +34,13 @@ pub struct DocFile {
     pub name: String,
     pub title: String,
     pub path: String,
-    pub word_count: u64
+    pub word_count: u64,
+    pub ws: u64,
+    pub parac: u64,
+    pub first_mu: String,
+    pub second_mu: String,
+    pub third_mu: String,
+
 }
 
 impl DocFile {
@@ -45,10 +51,15 @@ impl DocFile {
 
         DocFile {
             index: ind,
-            path: path_string,
-            name: "".to_string(),
+            path: path_string.clone(),
+            parac: 0,
+            ws: 0,
+            name: file_name_from_full_path(path_string.clone()).unwrap_or_default(),
             word_count: 0,
             title: "".to_string(),
+            first_mu: "".to_string(),
+            second_mu: "".to_string(),
+            third_mu: "".to_string(),
         }
     }
 }

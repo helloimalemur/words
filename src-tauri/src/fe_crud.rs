@@ -49,18 +49,24 @@ pub fn update_word_count(state: State<'_, Mutex<AppState>>) {
     let mut bind = state.lock();
     let mut app_state = bind.as_mut().unwrap();
     let cloned = app_state.files.files_container.clone();
-    let mut updates: HashMap<u32, u64> = HashMap::new();
+    let mut updates: HashMap<u32, CalcResults> = HashMap::new();
 
     for file in cloned {
         let ind = file.index;
         let calc = get_calculations(file.path);
-        updates.insert(ind, calc.word_count as u64);
+        updates.insert(ind, calc);
     }
 
-    for (ind, wc) in updates {
+    for (ind, calc_res) in updates {
         for mut entry in app_state.files.files_container.iter_mut() {
             if entry.index.eq(&ind) {
-                entry.word_count = wc as u64
+                entry.word_count = calc_res.word_count as u64;
+                entry.parac = calc_res.paragraph_count as u64;
+                entry.ws = calc_res.white_space as u64;
+                entry.first_mu = calc_res.first_most_used.clone();
+                entry.second_mu = calc_res.second_most_used.clone();
+                entry.third_mu = calc_res.third_most_used.clone();
+
             }
         }
     }

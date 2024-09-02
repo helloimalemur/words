@@ -15,7 +15,7 @@ export default function Table() {
   // const [files, setFiles] = useState([{ index: 0, name: 'Lindsay Walton', title: 'Front-end Developer', path: '/home/foxx/test', word_count: '0' }]);
   //
   let filez = [
-    { index: 0, name: 'Lindsay Walton', title: 'Front-end Developer', path: '/home/foxx/test', word_count: '0' },
+    { index: 0, name: 'Lindsay Walton', title: 'Front-end Developer', parac: '/home/foxx/test', ws: '/home/foxx/test', word_count: '0', first_mu: "", second_mu: "", third_mu: "", },
   ]
 
   const printall = async () => {
@@ -123,31 +123,51 @@ export default function Table() {
                         <tr>
                             <th scope="col"
                                 className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">
-                    Name
-                  </th>
-                  <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                    Title
-                  </th>
-                  <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                    Path
-                  </th>
-                  <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                    Word Count
-                  </th>
-                  <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-0">
-                    <span className="sr-only">Edit</span>
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-200">
-                {(files !== null && files !== undefined && files !== "") ? files.map((file) => (
+                                Name
+                            </th>
+                            <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                Word Count
+                            </th>
+                            {/*<th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">*/}
+                            {/*    Title*/}
+                            {/*</th>*/}
+                            {/*<th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">*/}
+                            {/*  Path*/}
+                            {/*</th>*/}
+                            <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                Paragraph Count
+                            </th>
+                            <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                White space
+                            </th>
+                            <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                #1 Used
+                            </th>
+                            <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                #2 Used
+                            </th>
+                            <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                #3 Used
+                            </th>
+                            <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-0">
+                                <span className="sr-only">Edit</span>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody className="divide-y divide-gray-200">
+                        {(files !== null && files !== undefined && files !== "") ? files.map((file) => (
                   <tr key={file.index}>
                     <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
                       {file.name}
                     </td>
-                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{file.title}</td>
-                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{file.path}</td>
-                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{file.word_count}</td>
+                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{file.word_count}</td>
+                      {/*<td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{file.title}</td>*/}
+                      {/*<td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{file.path}</td>*/}
+                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{file.parac}</td>
+                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{file.ws}</td>
+                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{file.first_mu}</td>
+                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{file.second_mu}</td>
+                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{file.third_mu}</td>
                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                       <a
                         onClick={() => {
